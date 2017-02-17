@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 15:17:05 by zsmith            #+#    #+#             */
-/*   Updated: 2017/02/17 15:19:38 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/02/17 15:50:04 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void					response(int sockfd)
 		error("ERROR reading from socket");
 	printf("Here is the message: %s\n", buffer);
 	if (!ft_strncmp(buffer, "ping", 4))
-		n = write(newsockfd, "pong pong", 10);
+	{
+			n = write(newsockfd, "pong\n", 5);
+			n = write(newsockfd, "pong\n", 5);
+		}
 	else
 		n = write(newsockfd, "not today", 10);
 	if (n < 0)
