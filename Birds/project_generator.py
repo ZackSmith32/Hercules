@@ -46,19 +46,16 @@ def update_makefile(search_str, insert_text):
 	makefile_contents = f.readlines()
 	for line in makefile_contents:
 		if search_str in line:
-			print 'match found: ' + makefile_contents[i]
 			makefile_contents[i] = makefile_contents[i][:-1]
 			makefile_contents[i] += insert_text
 			print makefile_contents[i]
+			f.seek(0)
 			break ;
 		i += 1
 	f.writelines(makefile_contents)
-	print "after write"
-	f.close()
+	f.close
 
 update_makefile("NAME	=", '	' + project_name + '\n')
-
-
 
 open(new_dir_path + '/.gitignore', 'w')
 '''
@@ -71,12 +68,10 @@ libft_lib = sys.stdin.readline()
 libft_lib = libft_lib[:-1]
 if len(libft_lib) == 0:
 	print "no response"
-	exit()
-#check if file already exists
-if libft_lib == "y":
+elif libft_lib == "y":
 	shutil.copy(home_path + '/' + 'libft_dir/libft/libft.h', new_dir_path + '/includes')
 	os.symlink(home_path + '/' + 'libft_dir/libft/libft.a', new_dir_path + '/libdir/libft.a')
-	libs_for_makefile += "	libft.a"
+	libs_for_makefile += "libft.a"
 
 
 sys.stdout.write("printf? ")
@@ -84,39 +79,34 @@ printf_lib = sys.stdin.readline()
 printf_lib = printf_lib[:-1]
 if len(printf_lib) == 0:
 	print "no response"
-	exit()
-if printf_lib == "y":
+elif printf_lib == "y":
 	shutil.copy(home_path + '/' + 'printf/includes/ft_printf.h', new_dir_path + '/includes')
 	os.symlink(home_path + '/' + 'printf/libftprintf.a', new_dir_path + '/libdir/libftprintf.a')
-	libs_for_makefile += ", libftprintf.a"
+	libs_for_makefile += " libftprintf.a"
 
 sys.stdout.write("vector? ")
 vector_lib = sys.stdin.readline()
 vector_lib = vector_lib[:-1]
 if len(vector_lib) == 0:
 	print "no response"
-	exit()
-if vector_lib == "y":
+elif vector_lib == "y":
 	shutil.copy(home_path + '/' + 'vect/includes/vect.h', new_dir_path + '/includes')
 	os.symlink(home_path + '/' + 'vect/libvect.a', new_dir_path + '/libdir/libvect.a')
-	libs_for_makefile += ", libvect.a"
+	libs_for_makefile += " libvect.a"
 
 sys.stdout.write("array? ")
 array_lib = sys.stdin.readline()
 array_lib = array_lib[:-1]
 if len(array_lib) == 0:
 	print "no response"
-	exit()
-if array_lib == "y":
+elif array_lib == "y":
 	shutil.copy(home_path + '/' + 'libarray/includes/libarray.h', new_dir_path + '/includes')
 	os.symlink(home_path + '/' + 'libarray/libarray.a', new_dir_path + '/libdir/libarray.a')
-	libs_for_makefile += ", libarray.a"
-
+	libs_for_makefile += " libarray.a"
 
 if len(libs_for_makefile) != 0:
 	print "putting libs in makefile"
-	update_makefile("LIBFILES=", 'libs_for_makefile' + '\n')
-
+	update_makefile("LIBFILES=", '	' + libs_for_makefile + '\n')
 
 
 
